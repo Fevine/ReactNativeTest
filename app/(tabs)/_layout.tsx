@@ -35,9 +35,18 @@ export default function TabLayout() {
       <Tabs.Screen
         name="counter"
         options={{
+          title: 'Counter',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'flame' : 'flame-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="todo"
+        options={{
           title: 'ToDo',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'bag-handle' : 'bag-handle-outline'} color={color} />
+            <TabBarIcon name={focused ? 'checkmark' : 'checkmark-outline'} color={color} />
           ),
         }}
       />
