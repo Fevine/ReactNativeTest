@@ -1,13 +1,22 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import uuid from 'react-native-uuid';
+
+type ToDo = {
+  id: string;
+  text: string;
+};
 
 export default function TabTwoScreen() {
-
-  const [text, setText] = useState<string>('')
-  const [ToDos, setToDos] = useState<string[]>([])
+  const [text, setText] = useState<string>('');
+  const [toDos, setToDos] = useState<ToDo[]>([]);
 
   function handleText() {
-    setToDos([...ToDos, text])
+    if (text.trim()) {
+      const newToDo = { id: uuid.v4() as string, text };
+      setToDos([...toDos, newToDo]);
+      setText('');
+    }
   }
 
   return (
@@ -16,17 +25,22 @@ export default function TabTwoScreen() {
       <TextInput
         style={styles.input}
         onChangeText={(e) => setText(e)}
-        placeholder='Enter Text Here...'
-      ></TextInput>
+        value={text}
+        placeholder="Enter Text Here..."
+      />
       <Button
-        title='Click'
+        title="Click"
         onPress={handleText}
       />
       <ScrollView style={styles.div}>
-        {ToDos && ToDos.map((todo) => (
-          <Text style={styles.text}>
-            {todo}
-          </Text>
+        {toDos.map((todo) => (
+          <View key={todo.id} style={styles.todoContainer}>
+            <Text style={styles.text}>{todo.text}</Text>
+            <Button
+              title="Delete"
+              onPress={() => setToDos(toDos.filter((item) => item.id !== todo.id))}
+            />
+          </View>
         ))}
       </ScrollView>
     </View>
@@ -57,7 +71,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 24,
-    width: '100%',
     textAlign: 'center',
     paddingTop: 5,
   },
@@ -66,5 +79,12 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     paddingTop: 5,
+  },
+  todoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 50,
+    flex: 1,
   },
 });
