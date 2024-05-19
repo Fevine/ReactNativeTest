@@ -33,11 +33,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore2"
+        name="todo"
         options={{
-          title: 'Explore',
+          title: 'ToDo',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'bag-handle' : 'bag-handle-outline'} color={color} />
           ),
         }}
       />
