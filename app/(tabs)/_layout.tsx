@@ -33,7 +33,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="todo"
+        name="counter"
         options={{
           title: 'ToDo',
           tabBarIcon: ({ color, focused }) => (
