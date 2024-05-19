@@ -1,17 +1,18 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { useState } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function TabTwoScreen() {
+
+  const [count, setCount] = useState(0)
+
   return (
-    <ThemedView>
-      <ThemedText>Hello there</ThemedText>
-    </ThemedView>
+    <View style={styles.div}>
+      <Text style={styles.title}>Counter</Text>
+      <Button
+        title={`You have clicked ${count} times!`}
+        onPress={() => setCount(count + 1)}
+      ></Button>
+    </View>
   );
 }
 
@@ -26,4 +27,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 8,
   },
+  div: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'khaki',
+  },
+  title: {
+    fontSize: 44,
+    width: '100%',
+    textAlign: 'center',
+    paddingTop: 20,
+  }
 });
